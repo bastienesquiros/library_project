@@ -4,8 +4,10 @@ import dao.UserDAO;
 import entity.User;
 
 public class App {
+	
     public static void main(String[] args) {
-
+    	Connect connect = new Connect();
+    	connect.getConnection();
         UserDAO userDAO = new UserDAO(); // Créer une instance de UserDAO afin de manipuler la table user dans la base
                                          // de données
 
