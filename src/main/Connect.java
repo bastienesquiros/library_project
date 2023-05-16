@@ -17,7 +17,7 @@ public class Connect {
             try {
                 connection = DriverManager.getConnection(URL_STRING, LOGIN_STRING, PASSWORD_STRING);
             } catch (SQLException e) {
-                System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
+                System.out.println("Error while connecting to the database : " + e.getMessage());
             }
         }
         return connection;

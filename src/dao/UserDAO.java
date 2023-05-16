@@ -28,7 +28,7 @@ public class UserDAO implements DAO<User, String> {
             }
             return users;
         } catch (SQLException exception) {
-            System.out.println("Erreur lors de la récupération des utilisateurs : " + exception.getMessage());
+            System.out.println("Error while getting users : " + exception.getMessage());
         }
         return null;
     }
@@ -51,7 +51,7 @@ public class UserDAO implements DAO<User, String> {
                 System.out.println("User does not exist");
             }
         } catch (SQLException exception) {
-            System.out.println("Erreur lors de la récupération de l'utilisateur : " + exception.getMessage());
+            System.out.println("Error while finding user : " + exception.getMessage());
         }
         return null;
     }
@@ -67,7 +67,7 @@ public class UserDAO implements DAO<User, String> {
             prepare.executeUpdate();
             return obj;
         } catch (SQLException exception) {
-            System.out.println("Erreur lors de la création de l'utilisateur : " + exception.getMessage());
+            System.out.println("Error while creating user : " + exception.getMessage());
         }
         return null;
     }
@@ -81,7 +81,7 @@ public class UserDAO implements DAO<User, String> {
             prepare.executeUpdate();
             return "User deleted";
         } catch (SQLException exception) {
-            System.out.println("Erreur lors de la suppression de l'utilisateur : " + exception.getMessage());
+            System.out.println("Error while deleting user : " + exception.getMessage());
         }
         return "User not deleted";
     }
@@ -98,7 +98,7 @@ public class UserDAO implements DAO<User, String> {
             prepare.executeUpdate();
             return "User updated";
         } catch (SQLException exception) {
-            System.out.println("Erreur lors de la mise à jour de l'utilisateur : " + exception.getMessage());
+            System.out.println("Error while updating user : " + exception.getMessage());
         }
         return null;
     }
