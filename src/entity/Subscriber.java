@@ -1,16 +1,17 @@
 package entity;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Subscriber {
 	
 	private int idSubscriber;
 	private String firstname;
 	private String lastname;
-	private String adress;
+	private String address;
 	private int nbMaxBorrow;
 	private int blame;
-	private Date notAllowedToBorrowUntil;
+	private LocalDate notAllowedToBorrowUntil;
 	private int idUser;
 	
 //	@ManyToOne
@@ -20,19 +21,26 @@ public class Subscriber {
    public Subscriber() {
    }
   
-   public Subscriber(int idSubscriber, String firstname, String lastname, String adress, int nbMaxBorrow, int blame,
-   		Date notAllowedToBorrowUntil, int idUser) {
-   	this.idSubscriber = idSubscriber;
-   	this.firstname = firstname;
-   	this.lastname = lastname;
-   	this.adress = adress;
-   	this.nbMaxBorrow = nbMaxBorrow;
-   	this.blame = blame;
-   	this.notAllowedToBorrowUntil = notAllowedToBorrowUntil;
-   	this.idUser = idUser;
-   	
-   }
-  
+	public Subscriber(String firstname, String lastname, String address, int idUser) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.address = address;
+		this.nbMaxBorrow = 5;
+		this.blame = 0;
+		this.notAllowedToBorrowUntil = null;
+		this.idUser = idUser;
+	}
+	
+	public Subscriber(String firstname, String lastname, String address, String notAllowedToBorrowUntil, int idUser) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.address = address;
+		this.nbMaxBorrow = 5;
+		this.blame = 0;
+		this.notAllowedToBorrowUntil = LocalDate.parse(notAllowedToBorrowUntil);
+		this.idUser = idUser;
+	}
+  	
 	public int getIdSubscriber() {
 		return idSubscriber;
 	}
@@ -57,12 +65,12 @@ public class Subscriber {
 		this.lastname = lastname;
 	}
 	
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 	
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	public int getNbMaxBorrow() {
@@ -81,11 +89,11 @@ public class Subscriber {
 		this.blame = blame;
 	}
 	
-	public Date getNotAllowedToBorrowUntil() {
+	public LocalDate getNotAllowedToBorrowUntil() {
 		return notAllowedToBorrowUntil;
 	}
 	
-	public void setNotAllowedToBorrowUntil(Date notAllowedToBorrowUntil) {
+	public void setNotAllowedToBorrowUntil(LocalDate notAllowedToBorrowUntil) {
 		this.notAllowedToBorrowUntil = notAllowedToBorrowUntil;
 	}
 	
@@ -100,7 +108,7 @@ public class Subscriber {
 	@Override
 	public String toString() {
 		return "Subscriber [idSubscriber=" + idSubscriber + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", adress=" + adress + ", nbMaxBorrow=" + nbMaxBorrow + ", blame=" + blame
+				+ ", address=" + address + ", nbMaxBorrow=" + nbMaxBorrow + ", blame=" + blame
 				+ ", notAllowedToBorrowUntil=" + notAllowedToBorrowUntil + ", idUser=" + idUser + "]";
 	}
 }
