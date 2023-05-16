@@ -9,7 +9,7 @@ import java.util.List;
 import entity.User;
 import main.Connect;
 
-public class UserDAO implements DAO<User, String> {
+public class UserDAO implements DAO<User> {
 
     @Override
     public List<User> findAll() {

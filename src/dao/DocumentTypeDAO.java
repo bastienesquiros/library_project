@@ -9,7 +9,7 @@ import java.util.List;
 import entity.DocumentType;
 import main.Connect;
 
-public class DocumentTypeDAO implements DAO<DocumentType, String> {
+public class DocumentTypeDAO implements DAO<DocumentType> {
 
     @Override
     public List<DocumentType> findAll() {
