@@ -6,10 +6,14 @@ public class User {
     private String password;
     private boolean isLibrarian;
 
-    @Override
-    public String toString() {
-        return "User [idUser=" + idUser + ", login=" + login + ", password=" + password + ", isLibrarian=" + isLibrarian
-                + "]";
+    public User() {
+    }
+
+    public User(String login, String password, boolean isLibrarian) {
+        this.login = login;
+        this.password = password;
+        this.isLibrarian = isLibrarian;
+
     }
 
     public int getIdUser() {
@@ -44,7 +48,10 @@ public class User {
         this.isLibrarian = isLibrarian;
     }
 
-    public User() {
+    @Override
+    public String toString() {
+        return "User [idUser=" + idUser + ", login=" + login + ", password=" + password + ", isLibrarian=" + isLibrarian
+                + "]";
     }
 
 }
