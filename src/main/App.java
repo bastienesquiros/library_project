@@ -50,18 +50,6 @@ public class App {
             System.out.println("Wrong username or password");
             return false;
         }
-
-        Scanner information = new Scanner(System.in);
-        System.out.println("WELCOME TO THE LIBRARY SYSTEM");
-        System.out.println("Enter your username: ");
-        username = information.nextLine();
-        System.out.println("Enter your password: ");
-        String password = information.nextLine();
-
-        boolean verification = UserDAO.signIn(username, password);
-
-        return verification;
-
     }
 
     private static void librarianMenu() {
