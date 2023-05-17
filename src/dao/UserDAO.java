@@ -103,4 +103,33 @@ public class UserDAO implements DAO<User> {
         return null;
     }
 
+    public static boolean signIn(String login, String password) {
+        try {
+            PreparedStatement prepare = Connect.getConnection()
+                    .prepareStatement("SELECT * FROM user WHERE login = ? AND password = ?");
+            prepare.setString(1, login);
+            prepare.setString(2, password);
+            ResultSet result = prepare.executeQuery();
+            return result.next();
+        } catch (SQLException exception) {
+            System.out.println("Error while signing in : " + exception.getMessage());
+        }
+        return false;
+    }
+
+    public static boolean isLibrarian(String login) {
+        try {
+            PreparedStatement prepare = Connect.getConnection()
+                    .prepareStatement("SELECT * FROM user WHERE login = ?");
+            prepare.setString(1, login);
+            ResultSet result = prepare.executeQuery();
+            if (result.next()) {
+                return result.getBoolean("is_librarian");
+            }
+        } catch (SQLException exception) {
+            System.out.println("Error while checking if user is librarian : " + exception.getMessage());
+        }
+        return false;
+    }
+
 }
