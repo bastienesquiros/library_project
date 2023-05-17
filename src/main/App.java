@@ -1,62 +1,50 @@
 package main;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
-import dao.DocumentTypeDAO;
-import dao.SubscriberDAO;
+import commands.LibrarianCommands;
+import commands.SubscriberCommands;
 import dao.UserDAO;
-import entity.DocumentType;
-import entity.User;
-import entity.Subscriber;
 
 public class App {
+    public static String username;
+
     public static void main(String[] args) {
-        App.signIn();
+        run();
     }
 
-    public static void signIn() {
-        boolean isLibrarian = false;
-        boolean isSubscriber = false;
-
-        try (Scanner signIn = new Scanner(System.in)) {
-            System.out.println("WELCOME TO THE LIBRARY SYSTEM");
-            System.out.println("Enter your username: ");
-            String username = signIn.nextLine();
-            System.out.println("Enter your password: ");
-            String password = signIn.nextLine();
-
-            boolean verification = UserDAO.signIn(username, password);
-
-            if (verification) {
-                if (UserDAO.isLibrarian(username)) {
-                    System.out.println("You are logged in as a librarian !");
-                    isLibrarian = true;
-                } else {
-                    System.out.println("You are logged in as a subscriber !");
-                    isSubscriber = true;
-
-                }
-
-            } else {
-                System.out.println("Wrong username or password!");
-            }
-        } catch (Exception e) {
-            System.out.println("Error while signing in: " + e.getMessage());
-        } finally {
-            if (isLibrarian) {
-                librarianMenu();
-            } else if (isSubscriber) {
-                subscriberMenu();
-            }
+    public static void run() {
+        if (signIn()) {
+            userType();
         }
     }
 
-    private static void subscriberMenu() {
-        System.out.println("A IMPLEMENTER");
+    public static void userType() {
+        if (UserDAO.isLibrarian(username)) {
+            LibrarianCommands.librarianMenu();
+        } else {
+            SubscriberCommands.subscriberMenu();
+        }
     }
 
-    private static void librarianMenu() {
-        System.out.println("A IMPLEMENTER");
+    public static boolean signIn() {
+
+        Scanner information = new Scanner(System.in);
+        System.out.println("                             ");
+        System.out.println("WELCOME TO THE LIBRARY SYSTEM");
+        System.out.println("-----------------------------");
+        System.out.println("                             ");
+        System.out.println("Enter your username: ");
+        username = information.nextLine();
+        System.out.println("Enter your password: ");
+        String password = information.nextLine();
+        if (UserDAO.signIn(username, password)) {
+            return true;
+        } else {
+            System.out.println("                          ");
+            System.out.println("Wrong username or password");
+            return false;
+        }
     }
+
 }

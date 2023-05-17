@@ -132,4 +132,25 @@ public class UserDAO implements DAO<User> {
         return false;
     }
 
+    public static String displayByUsername(String username) {
+        try {
+            PreparedStatement prepare = Connect.getConnection()
+                    .prepareStatement("SELECT * FROM user WHERE login = ?");
+            prepare.setString(1, username);
+            ResultSet result = prepare.executeQuery();
+            User user = new User();
+            if (result.next()) {
+                user.setIdUser(result.getInt("id_user"));
+                user.setLogin(result.getString("login"));
+                user.setPassword(result.getString("password"));
+                user.setLibrarian(result.getBoolean("is_librarian"));
+                return "Username : " + user.getLogin() + " Password : " + user.getPassword();
+            } else {
+                System.out.println("User does not exist");
+            }
+        } catch (SQLException exception) {
+            System.out.println("Error while finding user : " + exception.getMessage());
+        }
+        return null;
+    }
 }
