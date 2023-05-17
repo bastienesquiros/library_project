@@ -4,20 +4,25 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import dao.SubscriberDAO;
+import entity.Subscriber;
+
 public class LibrarianCommands {
 
     public static void librarianMenu() {
 
         try (Scanner librarianMenuScan = new Scanner(System.in)) {
-        	System.out.println("---------------");
-            System.out.println("LIBRARIAN MENU");
-            System.out.println("---------------");
+        	System.out.println(" ");
+            System.out.println("----------------------------------");
+            System.out.println("          LIBRARIAN MENU          ");
+            System.out.println("----------------------------------");
+        	System.out.println(" ");
             System.out.println("1 - Subscriber");
             System.out.println("2 - Document Type");
             System.out.println("3 - Document");
             // System.out.println("4 - Booking");
             // System.out.println("5 - Rules");
-
+        	System.out.println(" ");
             System.out.println("Enter option number: ");
             int selectedOption = librarianMenuScan.nextInt();
 
@@ -48,13 +53,16 @@ public class LibrarianCommands {
     public static void crudSubscriberMenu() {
 
         try (Scanner subscriberMenuScan = new Scanner(System.in)) {
-            System.out.println("POSSIBLE ACTIONS ON THE SUBSCRIBER");
-            System.out.println("---------------");
+        	System.out.println("                                  ");
+            System.out.println("----------------------------------");
+            System.out.println("         SUBSCRIBER CRUD          ");
+            System.out.println("----------------------------------");
+            System.out.println("                                  ");
             System.out.println("1 - Consult");
             System.out.println("2 - Add");
             System.out.println("3 - Modify");
             System.out.println("4 - Delete");
-
+            System.out.println(" ");
             System.out.println("Enter option number: ");
             int selectedOption = subscriberMenuScan.nextInt();
 
@@ -83,7 +91,29 @@ public class LibrarianCommands {
     }
     
     public static void consultSubscriber() {
-        System.out.println("ok");
+    	    	
+    	 try (Scanner consultSubscriberScan = new Scanner(System.in)) {
+    		 
+             System.out.println(" ");
+	    	 System.out.println("Select the subscriber you want work on");
+	         // System.out.println("Enter login subscriber: ");
+	         System.out.println("Enter firstname:");
+	         String firstnameSubscriber = consultSubscriberScan.nextLine();
+	         System.out.println("Enter lastname:");
+	         String lastnameSubscriber = consultSubscriberScan.nextLine();
+	         	         
+	         SubscriberDAO subscriberDAO = new SubscriberDAO();
+	         
+	         System.out.println(subscriberDAO.findByName(firstnameSubscriber, lastnameSubscriber));
+
+//	         String nameSubscriberString = firstnameSubscriber + lastnameSubscriber; 
+//             } else {
+//                 System.out.println("Option " + selectedOption + " doesn't exist. Choose an option between 1 and 4.");
+//             }
+
+         } catch (Exception e) {
+             System.out.println("ERROR :" + e.getMessage());
+         }
     }
 
     public static void addSubscriber() {

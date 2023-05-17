@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entity.Subscriber;
+import entity.User;
 import main.Connect;
 
 public class SubscriberDAO implements DAO<Subscriber> {
@@ -69,6 +70,7 @@ public class SubscriberDAO implements DAO<Subscriber> {
         }
         return null;
     }
+    
 
     @Override
     public Subscriber create(Subscriber obj) {
@@ -131,4 +133,36 @@ public class SubscriberDAO implements DAO<Subscriber> {
         }
         return null;
     }
+    
+    @Override
+    public Subscriber findByName(String firstname, String lastname) {
+    	try {
+    		PreparedStatement prepare = Connect.getConnection()
+    				.prepareStatement("SELECT * FROM subscriber WHERE lower(firstname) = ? AND lower(lastname) = ? ");
+    		prepare.setString(1, firstname);
+    		prepare.setString(2, lastname);
+    		ResultSet result = prepare.executeQuery();
+    		Subscriber subscriber = new Subscriber();
+    		if (result.next()) {
+    			subscriber.setIdSubscriber(result.getInt("id_subscriber"));
+    			subscriber.setFirstname(result.getString("firstname"));
+    			subscriber.setLastname(result.getString("lastname"));
+    			subscriber.setAddress(result.getString("address"));
+    			subscriber.setNbMaxBorrow(result.getInt("nb_max_borrow"));
+    			subscriber.setBlame(result.getInt("nb_blames"));
+    			subscriber.setIdUser(result.getInt("id_user"));
+    			Date sqlDate = result.getDate("not_allowed_to_borrow_until");
+    			LocalDate localDate = sqlDate.toLocalDate();
+    			subscriber.setNotAllowedToBorrowUntil(localDate);
+    			return subscriber;
+    		} else {
+    			System.out.println("Subscriber does not exist");
+    		}
+    	} catch (SQLException exception) {
+    		System.out.println("Error retrieving subscriber name " + firstname + " " + lastname);
+    		System.out.println(exception.getMessage());
+    	}
+    	return null;
+    }
+    
 }
