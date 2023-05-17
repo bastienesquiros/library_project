@@ -1,5 +1,7 @@
 package commands;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class LibrarianCommands {
@@ -7,7 +9,9 @@ public class LibrarianCommands {
     public static void librarianMenu() {
 
         try (Scanner librarianMenuScan = new Scanner(System.in)) {
+        	System.out.println("---------------");
             System.out.println("LIBRARIAN MENU");
+            System.out.println("---------------");
             System.out.println("1 - Subscriber");
             System.out.println("2 - Document Type");
             System.out.println("3 - Document");
@@ -45,6 +49,7 @@ public class LibrarianCommands {
 
         try (Scanner subscriberMenuScan = new Scanner(System.in)) {
             System.out.println("POSSIBLE ACTIONS ON THE SUBSCRIBER");
+            System.out.println("---------------");
             System.out.println("1 - Consult");
             System.out.println("2 - Add");
             System.out.println("3 - Modify");
@@ -64,7 +69,7 @@ public class LibrarianCommands {
                         addSubscriber();
                     case 3:
                         modifySubscriber();
-                    case 5:
+                    case 4:
                         deleteSubscriber();
                 }
 
@@ -76,4 +81,31 @@ public class LibrarianCommands {
             System.out.println("ERROR :" + e.getMessage());
         }
     }
+    
+    public static void consultSubscriber() {
+        System.out.println("ok");
+    }
+
+    public static void addSubscriber() {
+
+    }
+
+    public static void modifySubscriber() {
+
+    }
+
+    public static void deleteSubscriber() {
+
+    }
+
+
+
+    public static void crudDocumentTypeMenu() {
+
+    }
+
+    public static void crudDocumentMenu() {
+
+    }
+
 }
