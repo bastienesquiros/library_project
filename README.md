@@ -2,9 +2,9 @@
 
 Script SQL pour tester (ne pas oublier de changer les logins mySQL dans Connect) :
 
-CREATE DATABASE library_project
+CREATE DATABASE library_project;
 
-USE library_project
+USE library_project;
 
 CREATE TABLE user(
    id_user INT AUTO_INCREMENT,
