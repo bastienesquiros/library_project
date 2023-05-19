@@ -4,13 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import dao.DocumentDAO;
-import dao.SubscriberDAO;
-import entity.Document;
-import entity.Subscriber;
-import commands.LibrarianDocumentCommands;
-import commands.LibrarianSubscriberCommands;
-
 public class LibrarianGeneralCommands {
 
     public static void librarianMenu() {
@@ -41,7 +34,7 @@ public class LibrarianGeneralCommands {
                     case 2:
                         // crudDocumentTypeMenu();
                     case 3:
-                        LibrarianSubscriberCommands.librarianSubscriberMenu();
+                        LibrarianDocumentCommands.librarianDocumentMenu();
                         // case 4: booking();
                         // case 5: zoneRules();
                 }

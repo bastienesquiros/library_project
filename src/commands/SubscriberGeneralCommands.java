@@ -6,7 +6,7 @@ import dao.SubscriberDAO;
 import dao.UserDAO;
 import main.App;
 
-public class SubscriberCommands {
+public class SubscriberGeneralCommands {
 
     public static void subscriberMenu() {
         System.out.println("SUBSCRIBER MENU");

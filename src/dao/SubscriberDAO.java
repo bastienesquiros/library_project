@@ -76,16 +76,10 @@ public class SubscriberDAO implements DAO<Subscriber> {
         try {
             PreparedStatement prepare = Connect.getConnection()
                     .prepareStatement(
-                            "INSERT INTO subscriber (firstname, lastname, address, nb_max_borrow, nb_blames, not_allowed_to_borrow_until, id_user) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                            "INSERT INTO subscriber (firstname, lastname, address) VALUES (?, ?, ?)");
             prepare.setString(1, obj.getFirstname());
             prepare.setString(2, obj.getLastname());
             prepare.setString(3, obj.getAddress());
-            prepare.setInt(4, obj.getNbMaxBorrow());
-            prepare.setInt(5, obj.getBlame());
-            LocalDate localDate = obj.getNotAllowedToBorrowUntil();
-            Date sqlDate = Date.valueOf(localDate);
-            prepare.setDate(6, sqlDate);
-            prepare.setInt(7, obj.getIdUser());
             prepare.executeUpdate();
             return obj;
         } catch (SQLException exception) {

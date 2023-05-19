@@ -16,26 +16,13 @@ public class Subscriber {
     public Subscriber() {
     }
 
-    public Subscriber(String firstname, String lastname, String address, int idUser) {
+    
+    public Subscriber(String firstname, String lastname, String address) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
-        this.nbMaxBorrow = 5;
-        this.blame = 0;
-        this.notAllowedToBorrowUntil = null;
-        this.idUser = idUser;
     }
-
-    public Subscriber(String firstname, String lastname, String address, String notAllowedToBorrowUntil, int idUser) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.address = address;
-        this.nbMaxBorrow = 5;
-        this.blame = 0;
-        this.notAllowedToBorrowUntil = LocalDate.parse(notAllowedToBorrowUntil);
-        this.idUser = idUser;
-    }
-
+    
     public int getIdSubscriber() {
         return idSubscriber;
     }

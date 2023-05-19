@@ -3,9 +3,9 @@ package commands;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-
 import dao.SubscriberDAO;
-import commands.LibrarianGeneralCommands;
+import entity.Subscriber;
+import commands.LibrarianSubscriberCommands;
 
 public class LibrarianSubscriberCommands {
 
@@ -65,6 +65,7 @@ public class LibrarianSubscriberCommands {
             System.out.println("                                  ");
             System.out.println("   - Subscriber Informations -    ");
             System.out.println("                                  ");
+            System.out.println("Id subscriber : " + resu.getIdSubscriber());
             System.out.println("Subscriber : " + resu.getFirstname() + " " + resu.getLastname());
             System.out.println("Address : " + resu.getAddress());
             System.out.println("                                  ");
@@ -103,6 +104,35 @@ public class LibrarianSubscriberCommands {
 
     public static void addSubscriber() {
 
+    	try (Scanner addSubscriberScan = new Scanner(System.in)) {
+	    	System.out.println(" ");
+	    	System.out.println("To create the subscriber, enter his firstname:");
+	        String firstnameSubscriber = addSubscriberScan.nextLine();
+	        System.out.println("Enter his lastname:");
+	        String lastnameSubscriber = addSubscriberScan.nextLine();
+	        System.out.println("Enter his address:");
+	        String adressSubscriber = addSubscriberScan.nextLine();
+	         	        
+	        Subscriber newSubscriber = new Subscriber(firstnameSubscriber, lastnameSubscriber, adressSubscriber);
+	        subscriberDAO.create(newSubscriber);    
+	        
+	        var resu = subscriberDAO.findByName(firstnameSubscriber, lastnameSubscriber);
+	        System.out.println("                                  ");
+            System.out.println("   - New Subscriber Informations -    ");
+            System.out.println("                                  ");
+            System.out.println("Id subscriber : " + resu.getIdSubscriber());
+            System.out.println("Subscriber : " + resu.getFirstname() + " " + resu.getLastname());
+            System.out.println("Address : " + resu.getAddress());
+            System.out.println("                                  ");
+            System.out.println("Borrowing capacity : " + resu.getNbMaxBorrow() + " document(s)");
+            System.out.println("Blame number : " + resu.getBlame());
+            System.out.println("Borrowing prohibited until : " + resu.getNotAllowedToBorrowUntil());
+            
+            librarianSubscriberMenu();
+            
+    	} catch (Exception e) {
+            System.out.println("ERROR :" + e.getMessage());
+        }
     }
 
     public static void modifySubscriber() {
