@@ -1,8 +1,9 @@
 package main;
 
 import java.util.Scanner;
-import commands.LibrarianCommands;
-import commands.SubscriberCommands;
+
+import commands.LibrarianGeneralCommands;
+import commands.SubscriberGeneralCommands;
 import dao.ReservationDAO;
 import dao.UserDAO;
 import entity.Reservation;
@@ -23,9 +24,9 @@ public class App {
 
     public static void userType() {
         if (UserDAO.isLibrarian(username)) {
-            LibrarianCommands.librarianMenu();
+            LibrarianGeneralCommands.librarianMenu();
         } else {
-            SubscriberCommands.subscriberMenu();
+            SubscriberGeneralCommands.subscriberMenu();
         }
     }
 
