@@ -143,9 +143,11 @@ public class SubscriberDAO implements DAO<Subscriber> {
                 subscriber.setNbMaxBorrow(result.getInt("nb_max_borrow"));
                 subscriber.setBlame(result.getInt("nb_blames"));
                 subscriber.setIdUser(result.getInt("id_user"));
-                Date sqlDate = result.getDate("not_allowed_to_borrow_until");
-                LocalDate localDate = sqlDate.toLocalDate();
-                subscriber.setNotAllowedToBorrowUntil(localDate);
+                if (result.getDate("not_allowed_to_borrow_until") != null) {
+                    Date sqlDate = result.getDate("not_allowed_to_borrow_until");
+                    LocalDate localDate = sqlDate.toLocalDate();
+                    subscriber.setNotAllowedToBorrowUntil(localDate);
+                }
                 return subscriber;
             } else {
                 System.out.println("Subscriber does not exist");

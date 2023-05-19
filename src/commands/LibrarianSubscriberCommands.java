@@ -6,8 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import dao.SubscriberDAO;
+import dao.UserDAO;
 import entity.Document;
 import entity.Subscriber;
+import entity.User;
 import commands.LibrarianSubscriberCommands;
 
 public class LibrarianSubscriberCommands {
@@ -16,6 +18,7 @@ public class LibrarianSubscriberCommands {
 
     static SubscriberDAO subscriberDAO = new SubscriberDAO();
     static Subscriber currentSubscriber = null;
+    private static UserDAO userDAO = new UserDAO();
 
     public static void librarianSubscriberMenu() {
 
@@ -136,15 +139,22 @@ public class LibrarianSubscriberCommands {
 
         try (Scanner addSubscriberScan = new Scanner(System.in)) {
             System.out.println(" ");
-            System.out.println("To create the subscriber, enter his firstname:");
+            System.out.println("To create the user, enter his username:");
+            String username = addSubscriberScan.nextLine();
+            System.out.println("Enter his password:");
+            String password = addSubscriberScan.nextLine();
+            System.out.println("Enter his firstname:");
             String firstnameSubscriber = addSubscriberScan.nextLine();
             System.out.println("Enter his lastname:");
             String lastnameSubscriber = addSubscriberScan.nextLine();
             System.out.println("Enter his address:");
             String adressSubscriber = addSubscriberScan.nextLine();
 
-            Subscriber newSubscriber = new Subscriber(firstnameSubscriber, lastnameSubscriber, adressSubscriber);
-            subscriberDAO.create(newSubscriber);
+            User user = new User(username, password, false);
+            userDAO.create(user);
+            Subscriber subscriber = new Subscriber(firstnameSubscriber, lastnameSubscriber, adressSubscriber,
+                    user.getIdUser());
+            subscriberDAO.create(subscriber);
 
             var resu = subscriberDAO.findByName(firstnameSubscriber, lastnameSubscriber);
             System.out.println("                                  ");
