@@ -1,5 +1,6 @@
 package entity;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Subscriber {
@@ -16,26 +17,13 @@ public class Subscriber {
     public Subscriber() {
     }
 
-    public Subscriber(String firstname, String lastname, String address, int idUser) {
+    
+    public Subscriber(String firstname, String lastname, String address) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
-        this.nbMaxBorrow = 5;
-        this.blame = 0;
-        this.notAllowedToBorrowUntil = null;
-        this.idUser = idUser;
     }
-
-    public Subscriber(String firstname, String lastname, String address, String notAllowedToBorrowUntil, int idUser) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.address = address;
-        this.nbMaxBorrow = 5;
-        this.blame = 0;
-        this.notAllowedToBorrowUntil = LocalDate.parse(notAllowedToBorrowUntil);
-        this.idUser = idUser;
-    }
-
+    
     public int getIdSubscriber() {
         return idSubscriber;
     }
@@ -88,8 +76,8 @@ public class Subscriber {
         return notAllowedToBorrowUntil;
     }
 
-    public void setNotAllowedToBorrowUntil(LocalDate notAllowedToBorrowUntil) {
-        this.notAllowedToBorrowUntil = notAllowedToBorrowUntil;
+    public void setNotAllowedToBorrowUntil(LocalDate sqlDate) {
+        this.notAllowedToBorrowUntil = sqlDate;
     }
 
     public int getIdUser() {
