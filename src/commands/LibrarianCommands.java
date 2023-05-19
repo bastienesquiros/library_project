@@ -105,7 +105,7 @@ public class LibrarianCommands {
 	         SubscriberDAO subscriberDAO = new SubscriberDAO();
 	         
 	         System.out.println(subscriberDAO.findByName(firstnameSubscriber, lastnameSubscriber));
-
+	         
 //	         String nameSubscriberString = firstnameSubscriber + lastnameSubscriber; 
 //             } else {
 //                 System.out.println("Option " + selectedOption + " doesn't exist. Choose an option between 1 and 4.");
