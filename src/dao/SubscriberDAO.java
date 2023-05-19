@@ -134,7 +134,6 @@ public class SubscriberDAO implements DAO<Subscriber> {
         return null;
     }
     
-    @Override
     public Subscriber findByName(String firstname, String lastname) {
     	try {
     		PreparedStatement prepare = Connect.getConnection()

@@ -7,8 +7,6 @@ public interface DAO<T> {
     public List<T> findAll();
 
     public T find(int id);
-    
-    public T findByName(String firstname, String lastname);
 
     public T create(T obj);
 

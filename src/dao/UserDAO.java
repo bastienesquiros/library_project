@@ -154,9 +154,4 @@ public class UserDAO implements DAO<User> {
         return null;
     }
 
-	@Override
-	public User findByName(String firstname, String lastname) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
