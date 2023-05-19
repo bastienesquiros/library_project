@@ -106,10 +106,10 @@ public class SubscriberDAO implements DAO<Subscriber> {
     public String update(Subscriber obj) {
         try {
             PreparedStatement prepare = Connect.getConnection()
-                    .prepareStatement("UPDATE subscriber SET firstname = ?, "
-                            + "lastname = ?, address = ?, nb_max_borrow = ?, "
-                            + "nb_blames = ?, not_allowed_to_borrow_until = ?, "
-                            + "id_user = ? WHERE id_subscriber = ?");
+                    .prepareStatement("UPDATE subscriber SET firstname = ?, " 
+                    		+ "lastname = ?, address = ?, nb_max_borrow = ?, "
+                            + "nb_blames = ?, not_allowed_to_borrow_until = ?"
+                            + "WHERE id_subscriber = ?");
             prepare.setString(1, obj.getFirstname());
             prepare.setString(2, obj.getLastname());
             prepare.setString(3, obj.getAddress());
@@ -118,11 +118,11 @@ public class SubscriberDAO implements DAO<Subscriber> {
             LocalDate localDate = obj.getNotAllowedToBorrowUntil();
             Date sqlDate = Date.valueOf(localDate);
             prepare.setDate(6, sqlDate);
-            prepare.setInt(7, obj.getIdUser());
+            prepare.setInt(7, obj.getIdSubscriber());
             prepare.executeUpdate();
             return "Subscriber updated";
         } catch (SQLException exception) {
-            System.out.println("Error updating user : " + exception.getMessage());
+            System.out.println("Error updating subscriber : " + exception.getMessage());
         }
         return null;
     }

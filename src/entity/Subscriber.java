@@ -1,5 +1,6 @@
 package entity;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Subscriber {
@@ -75,8 +76,8 @@ public class Subscriber {
         return notAllowedToBorrowUntil;
     }
 
-    public void setNotAllowedToBorrowUntil(LocalDate notAllowedToBorrowUntil) {
-        this.notAllowedToBorrowUntil = notAllowedToBorrowUntil;
+    public void setNotAllowedToBorrowUntil(LocalDate sqlDate) {
+        this.notAllowedToBorrowUntil = sqlDate;
     }
 
     public int getIdUser() {
