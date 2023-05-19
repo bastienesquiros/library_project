@@ -10,6 +10,8 @@ import entity.Document;
 import entity.Subscriber;
 
 public class LibrarianCommands {
+
+    static SubscriberDAO subscriberDAO = new SubscriberDAO();
     static DocumentDAO documentDAO = new DocumentDAO();
     static Document currentDocument = null;
 
@@ -64,13 +66,12 @@ public class LibrarianCommands {
             System.out.println("                                  ");
             System.out.println("1 - Consult");
             System.out.println("2 - Add");
-            System.out.println("3 - Modify");
-            System.out.println("4 - Delete");
+            System.out.println("3 - Back to Librarian Menu");
             System.out.println(" ");
             System.out.println("Enter option number: ");
             int selectedOption = subscriberMenuScan.nextInt();
 
-            List<Integer> optionPossibility = Arrays.asList(1, 2, 3, 4);
+            List<Integer> optionPossibility = Arrays.asList(1, 2, 3);
 
             if (optionPossibility.contains(selectedOption)) {
 
@@ -80,13 +81,11 @@ public class LibrarianCommands {
                     case 2:
                         addSubscriber();
                     case 3:
-                        modifySubscriber();
-                    case 4:
-                        deleteSubscriber();
+                        librarianMenu();
                 }
 
             } else {
-                System.out.println("Option " + selectedOption + " doesn't exist. Choose an option between 1 and 4.");
+                System.out.println("Option " + selectedOption + " doesn't exist. Choose an option between 1 and 3.");
             }
 
         } catch (Exception e) {
@@ -100,21 +99,46 @@ public class LibrarianCommands {
 
             System.out.println(" ");
             System.out.println("Select the subscriber you want work on");
-            // System.out.println("Enter login subscriber: ");
             System.out.println("Enter firstname:");
             String firstnameSubscriber = consultSubscriberScan.nextLine();
             System.out.println("Enter lastname:");
             String lastnameSubscriber = consultSubscriberScan.nextLine();
 
-            SubscriberDAO subscriberDAO = new SubscriberDAO();
+            var resu = subscriberDAO.findByName(firstnameSubscriber, lastnameSubscriber);
 
-            System.out.println(subscriberDAO.findByName(firstnameSubscriber, lastnameSubscriber));
+            System.out.println("                                  ");
+            System.out.println("   - Subscriber Informations -    ");
+            System.out.println("                                  ");
+            System.out.println("Subscriber : " + resu.getFirstname() + " " + resu.getLastname());
+            System.out.println("Address : " + resu.getAddress());
+            System.out.println("                                  ");
+            System.out.println("Borrowing capacity : " + resu.getNbMaxBorrow() + " document(s)");
+            System.out.println("Blame number : " + resu.getBlame());
+            System.out.println("Borrowing prohibited until : " + resu.getNotAllowedToBorrowUntil());
+            System.out.println(" ");
+            System.out.println("             -----               ");
+            System.out.println("1 - Modify");
+            System.out.println("2 - Delete");
+            System.out.println("3 - Back to Subscriber Crud");
+            System.out.println(" ");
+            System.out.println("Enter option number: ");
+            int selectedOption = consultSubscriberScan.nextInt();
 
-            // String nameSubscriberString = firstnameSubscriber + lastnameSubscriber;
-            // } else {
-            // System.out.println("Option " + selectedOption + " doesn't exist. Choose an
-            // option between 1 and 4.");
-            // }
+            List<Integer> optionPossibility = Arrays.asList(1, 2, 3);
+
+            if (optionPossibility.contains(selectedOption)) {
+
+                switch (selectedOption) {
+                    case 1:
+                        modifySubscriber();
+                    case 2:
+                        deleteSubscriber();
+                    case 3:
+                        crudSubscriberMenu();
+                }
+            } else {
+                System.out.println("Option " + selectedOption + " doesn't exist. Choose an option between 1 and 3.");
+            }
 
         } catch (Exception e) {
             System.out.println("ERROR :" + e.getMessage());
