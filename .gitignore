@@ -1,6 +1,4 @@
 .classpath
 .project
 *.class
-
 .vscode/
-*.class

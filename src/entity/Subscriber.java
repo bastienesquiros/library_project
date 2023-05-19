@@ -17,13 +17,15 @@ public class Subscriber {
     public Subscriber() {
     }
 
-    
     public Subscriber(String firstname, String lastname, String address) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
     }
-    
+
+    public Subscriber(String firstName2, String lastName2, String address2, int idUser2) {
+    }
+
     public int getIdSubscriber() {
         return idSubscriber;
     }
