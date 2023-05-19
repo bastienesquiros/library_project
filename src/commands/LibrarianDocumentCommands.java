@@ -8,6 +8,10 @@ import dao.DocumentDAO;
 import entity.Document;
 
 public class LibrarianDocumentCommands {
+
+    private LibrarianDocumentCommands() {
+    }
+
     static DocumentDAO documentDAO = new DocumentDAO();
     static Document currentDocument = null;
 
@@ -20,20 +24,33 @@ public class LibrarianDocumentCommands {
             System.out.println("                                  ");
             System.out.println("1 - Consult");
             System.out.println("2 - Add");
+            System.out.println("3 - Back to Librarian Menu");
             System.out.println(" ");
             System.out.println("Enter option number: ");
             int selectedOption = documentMenuScan.nextInt();
 
-            List<Integer> optionPossibility = Arrays.asList(1, 2);
+            List<Integer> optionPossibility = Arrays.asList(1, 2, 3);
 
             if (optionPossibility.contains(selectedOption)) {
 
                 switch (selectedOption) {
                     case 1:
                         consultDocument();
+                        break;
                     case 2:
                         addDocument();
+                        break;
+                    case 3:
+                        LibrarianGeneralCommands.librarianMenu();
+                        break;
+                    default:
+                        System.out.println("Invalid option. Retry? (Y/N): ");
+                        String retry = documentMenuScan.next();
 
+                        if (retry.equalsIgnoreCase("N")) {
+                            librarianDocumentMenu();
+                        }
+                        break;
                 }
 
             } else {
@@ -56,6 +73,7 @@ public class LibrarianDocumentCommands {
             int documentType = addDocumentScan.nextInt();
             Document documentToCreate = new Document(documentTitle, documentType);
             documentDAO.create(documentToCreate);
+            librarianDocumentMenu();
         } catch (Exception e) {
             System.out.println("ERROR :" + e.getMessage());
         }
@@ -75,7 +93,9 @@ public class LibrarianDocumentCommands {
             currentDocument.setIdDocumentType(newDocumentType);
 
             String updateResult = documentDAO.update(currentDocument);
+            System.out.println("Document updated");
             System.out.println(updateResult);
+            librarianDocumentMenu();
         } catch (Exception e) {
             System.out.println("ERROR :" + e.getMessage());
         }
@@ -84,6 +104,8 @@ public class LibrarianDocumentCommands {
 
     private static void deleteDocument() {
         documentDAO.delete(currentDocument);
+        System.out.println("Document deleted");
+        librarianDocumentMenu();
     }
 
     private static void consultDocument() {

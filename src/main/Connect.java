@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Connect {
+    private Connect() {
+    }
 
     private static final String URL_STRING = "jdbc:mysql://localhost:3306/library_project?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String LOGIN_STRING = "bastien"; // A CHANGER

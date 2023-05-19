@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import dao.SubscriberDAO;
-import commands.LibrarianGeneralCommands;
 
 public class LibrarianSubscriberCommands {
+    private LibrarianSubscriberCommands() {
+    }
 
     static SubscriberDAO subscriberDAO = new SubscriberDAO();
 
@@ -33,11 +34,22 @@ public class LibrarianSubscriberCommands {
                 switch (selectedOption) {
                     case 1:
                         consultSubscriber();
+                        break;
                     case 2:
                         addSubscriber();
+                        break;
                     case 3:
                         LibrarianGeneralCommands.librarianMenu();
-                
+                        break;
+                    default:
+                        System.out.println("Invalid option. Retry? (Y/N): ");
+                        String retry = subscriberMenuScan.next();
+
+                        if (retry.equalsIgnoreCase("N")) {
+                            System.out.println("Back to Librarian Menu");
+                            LibrarianGeneralCommands.librarianMenu();
+                        }
+                        break;
                 }
 
             } else {
@@ -87,10 +99,22 @@ public class LibrarianSubscriberCommands {
                 switch (selectedOption) {
                     case 1:
                         modifySubscriber();
+                        break;
                     case 2:
                         deleteSubscriber();
+                        break;
                     case 3:
                         librarianSubscriberMenu();
+                        break;
+                    default:
+                        System.out.println("Invalid option. Retry? (Y/N): ");
+                        String retry = consultSubscriberScan.next();
+
+                        if (retry.equalsIgnoreCase("N")) {
+                            System.out.println("Back to Subscriber Crud");
+                            librarianSubscriberMenu();
+                        }
+                        break;
                 }
             } else {
                 System.out.println("Option " + selectedOption + " doesn't exist. Choose an option between 1 and 3.");
@@ -102,14 +126,14 @@ public class LibrarianSubscriberCommands {
     }
 
     public static void addSubscriber() {
-
+        // TODO
     }
 
     public static void modifySubscriber() {
-
+        // TODO
     }
 
     public static void deleteSubscriber() {
-
+        // TODO
     }
 }

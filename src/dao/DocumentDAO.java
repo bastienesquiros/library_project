@@ -25,7 +25,7 @@ public class DocumentDAO implements DAO<Document> {
             }
             return documents;
         } catch (SQLException exception) {
-            System.out.println("Erreur lors de la récupération des documents : " + exception.getMessage());
+            System.out.println("Error while deleting document  : " + exception.getMessage());
         }
         return null;
     }
@@ -43,10 +43,10 @@ public class DocumentDAO implements DAO<Document> {
                 document.setIdDocumentType(result.getInt("id_document_type"));
                 return document;
             } else {
-                System.out.println("Ce document n'existe pas");
+                System.out.println("This document does not exist");
             }
         } catch (SQLException exception) {
-            System.out.println("Erreur lors de la récupération du document : " + exception.getMessage());
+            System.out.println("Error while deleting document : " + exception.getMessage());
         }
         return null;
     }
@@ -58,10 +58,10 @@ public class DocumentDAO implements DAO<Document> {
             prepare.setString(1, document.getTitle());
             prepare.setInt(2, document.getIdDocumentType());
             prepare.executeUpdate();
-            System.out.println("Document créé avec succès");
+            System.out.println("Document created with success");
             return document;
         } catch (SQLException exception) {
-            System.out.println("Erreur lors de la création du document : " + exception.getMessage());
+            System.out.println("Error while deleting document  : " + exception.getMessage());
         }
         return null;
     }
@@ -76,7 +76,7 @@ public class DocumentDAO implements DAO<Document> {
             prepare.executeUpdate();
             return "Document mis à jour avec succès";
         } catch (SQLException exception) {
-            System.out.println("Erreur lors de la mise à jour du document : " + exception.getMessage());
+            System.out.println("Error while deleting document  : " + exception.getMessage());
         }
         return null;
     }
@@ -89,7 +89,7 @@ public class DocumentDAO implements DAO<Document> {
             prepare.executeUpdate();
             return "Document supprimé avec succès";
         } catch (SQLException exception) {
-            System.out.println("Erreur lors de la suppression du document : " + exception.getMessage());
+            System.out.println("Error while deleting document  : " + exception.getMessage());
         }
         return null;
     }
@@ -110,7 +110,7 @@ public class DocumentDAO implements DAO<Document> {
                 System.out.println("Document does not exist");
             }
         } catch (SQLException exception) {
-            System.out.println("Erreur while retrieving document : " + exception.getMessage());
+            System.out.println("Error while retrieving document : " + exception.getMessage());
         }
         return null;
     }
@@ -121,7 +121,7 @@ public class DocumentDAO implements DAO<Document> {
             prepare.setInt(1, currentDocument.getIdDocument());
             prepare.executeUpdate();
         } catch (SQLException exception) {
-            System.out.println("Erreur lors de la suppression du document : " + exception.getMessage());
+            System.out.println("Error while deleting document : " + exception.getMessage());
         }
     }
 

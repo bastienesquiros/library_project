@@ -4,14 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import dao.DocumentDAO;
-import dao.SubscriberDAO;
-import entity.Document;
-import entity.Subscriber;
-import commands.LibrarianDocumentCommands;
-import commands.LibrarianSubscriberCommands;
-
 public class LibrarianGeneralCommands {
+    private LibrarianGeneralCommands() {
+    }
 
     public static void librarianMenu() {
 
@@ -30,24 +25,25 @@ public class LibrarianGeneralCommands {
             System.out.println("Enter option number: ");
             int selectedOption = librarianMenuScan.nextInt();
 
-            List<Integer> optionPossibility = Arrays.asList(1, 2, 3);
+            List<Integer> optionPossibility = Arrays.asList(1, 2);
 
             if (optionPossibility.contains(selectedOption)) {
 
                 switch (selectedOption) {
                     case 1:
                         LibrarianSubscriberCommands.librarianSubscriberMenu();
-
+                        break;
                     case 2:
-                        // crudDocumentTypeMenu();
-                    case 3:
-                        LibrarianSubscriberCommands.librarianSubscriberMenu();
-                        // case 4: booking();
-                        // case 5: zoneRules();
+                        LibrarianDocumentCommands.librarianDocumentMenu();
+                        break;
+                    // case 3: documenttype();
+                    // case 4: booking();
+                    // case 5: zoneRules();
+                    default:
                 }
 
             } else {
-                System.out.println("Option " + selectedOption + " doesn't exist. Choose an option between 1 and 3.");
+                System.out.println("Option " + selectedOption + " doesn't exist. Choose an option between 1 and 2.");
             }
 
         } catch (Exception e) {

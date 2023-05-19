@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
-
 import entity.Reservation;
 import main.Connect;
 

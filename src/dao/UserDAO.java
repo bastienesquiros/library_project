@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.PreparedStatement;
+import java.sql.Statement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -59,15 +61,22 @@ public class UserDAO implements DAO<User> {
     @Override
     public User create(User obj) {
         try {
-            PreparedStatement prepare = Connect.getConnection()
-                    .prepareStatement("INSERT INTO user (login, password, is_librarian) VALUES (?, ?, ?)");
+            PreparedStatement prepare = Connect.getConnection().prepareStatement(
+                    "INSERT INTO user (login, password, is_librarian) VALUES (?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS);
             prepare.setString(1, obj.getLogin());
             prepare.setString(2, obj.getPassword());
             prepare.setBoolean(3, obj.isLibrarian());
             prepare.executeUpdate();
-            return obj;
+
+            ResultSet generatedKeys = prepare.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int generatedId = generatedKeys.getInt(1);
+                obj.setIdUser(generatedId);
+                return obj;
+            }
         } catch (SQLException exception) {
-            System.out.println("Error while creating user : " + exception.getMessage());
+            System.out.println("Error while creating user: " + exception.getMessage());
         }
         return null;
     }
@@ -78,6 +87,19 @@ public class UserDAO implements DAO<User> {
             PreparedStatement prepare = Connect.getConnection()
                     .prepareStatement("DELETE FROM user WHERE id_user = ?");
             prepare.setInt(1, id);
+            prepare.executeUpdate();
+            return "User deleted";
+        } catch (SQLException exception) {
+            System.out.println("Error while deleting user : " + exception.getMessage());
+        }
+        return "User not deleted";
+    }
+
+    public static String delete(String login) {
+        try {
+            PreparedStatement prepare = Connect.getConnection()
+                    .prepareStatement("DELETE FROM user WHERE login = ?");
+            prepare.setString(1, login);
             prepare.executeUpdate();
             return "User deleted";
         } catch (SQLException exception) {

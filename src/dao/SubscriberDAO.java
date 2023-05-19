@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entity.Subscriber;
-import entity.User;
 import main.Connect;
 
 public class SubscriberDAO implements DAO<Subscriber> {
@@ -82,9 +81,13 @@ public class SubscriberDAO implements DAO<Subscriber> {
             prepare.setString(3, obj.getAddress());
             prepare.setInt(4, obj.getNbMaxBorrow());
             prepare.setInt(5, obj.getBlame());
-            LocalDate localDate = obj.getNotAllowedToBorrowUntil();
-            Date sqlDate = Date.valueOf(localDate);
-            prepare.setDate(6, sqlDate);
+            if (obj.getNotAllowedToBorrowUntil() == null) {
+                prepare.setDate(6, null);
+            } else {
+                LocalDate localDate = obj.getNotAllowedToBorrowUntil();
+                Date sqlDate = Date.valueOf(localDate);
+                prepare.setDate(6, sqlDate);
+            }
             prepare.setInt(7, obj.getIdUser());
             prepare.executeUpdate();
             return obj;
@@ -163,4 +166,50 @@ public class SubscriberDAO implements DAO<Subscriber> {
         return null;
     }
 
+    public static Subscriber displaySubscriberAndUserData(String login) {
+        try {
+            PreparedStatement prepare = Connect.getConnection()
+                    .prepareStatement(
+                            "SELECT * FROM subscriber INNER JOIN user ON subscriber.id_user = user.id_user WHERE user.login = ? ");
+            prepare.setString(1, login);
+            ResultSet result = prepare.executeQuery();
+            Subscriber subscriber = new Subscriber();
+            if (result.next()) {
+                subscriber.setIdSubscriber(result.getInt("id_subscriber"));
+                subscriber.setFirstname(result.getString("firstname"));
+                subscriber.setLastname(result.getString("lastname"));
+                subscriber.setAddress(result.getString("address"));
+                subscriber.setNbMaxBorrow(result.getInt("nb_max_borrow"));
+                subscriber.setBlame(result.getInt("nb_blames"));
+                subscriber.setIdUser(result.getInt("id_user"));
+                if (result.getDate("not_allowed_to_borrow_until") != null) {
+                    Date sqlDate = result.getDate("not_allowed_to_borrow_until");
+                    LocalDate localDate = sqlDate.toLocalDate();
+                    subscriber.setNotAllowedToBorrowUntil(localDate);
+                }
+                return subscriber;
+            } else {
+                System.out.println("Subscriber does not exist");
+            }
+        } catch (SQLException exception) {
+            System.out.println("Error retrieving subscriber name ");
+            System.out.println(exception.getMessage());
+        }
+        return null;
+    }
+
+    public static String deleteSubscriberByUserLogin(String login) {
+        try {
+            PreparedStatement prepare = Connect.getConnection()
+                    .prepareStatement(
+                            "DELETE FROM subscriber WHERE id_user = (SELECT id_user FROM user WHERE login = ?)");
+            prepare.setString(1, login);
+            prepare.executeUpdate();
+            return "Subscriber deleted";
+        } catch (SQLException exception) {
+            System.out.println("Error deleting user : " + exception.getMessage());
+        }
+        return "Subscriber not deleted";
+
+    }
 }
