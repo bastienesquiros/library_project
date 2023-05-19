@@ -26,7 +26,7 @@ CREATE TABLE subscriber(
    not_allowed_to_borrow_until DATE,	
    id_user INT,
    PRIMARY KEY(id_subscriber),
-   FOREIGN KEY(id_user) REFERENCES user(id_user) ON DELETE CASCADE ON UPDATE CASCADE
+   FOREIGN KEY(id_user) REFERENCES user(id_user) ON DELETE CASCADE ON UPDATE CASCADE,
 UNIQUE(id_user)
 );
 
@@ -74,7 +74,7 @@ CREATE TABLE borrow(
    date_beginning DATE NOT NULL,
    date_end DATE,
    PRIMARY KEY(id_subscriber, id_copy),
-	UNIQUE(id_copy)
+	UNIQUE(id_copy),
    FOREIGN KEY(id_subscriber) REFERENCES subscriber(id_subscriber),
    FOREIGN KEY(id_copy) REFERENCES copy(id_copy) ON DELETE CASCADE ON UPDATE CASCADE
 );
