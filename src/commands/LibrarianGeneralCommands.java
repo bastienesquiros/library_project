@@ -17,10 +17,11 @@ public class LibrarianGeneralCommands {
             System.out.println("----------------------------------");
             System.out.println(" ");
             System.out.println("1 - Subscriber");
-            System.out.println("2 - Document Type");
-            System.out.println("3 - Document");
+            System.out.println("2 - Document");
+            // System.out.println("3 - Document Type");
             // System.out.println("4 - Booking");
             // System.out.println("5 - Rules");
+
             System.out.println(" ");
             System.out.println("Enter option number: ");
             int selectedOption = librarianMenuScan.nextInt();
