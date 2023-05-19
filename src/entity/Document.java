@@ -3,6 +3,15 @@ package entity;
 public class Document {
     private int idDocument;
     private String title;
+
+    public Document() {
+    }
+
+    public Document(String title, int idDocumentType) {
+        this.title = title;
+        this.idDocumentType = idDocumentType;
+    }
+
     private int idDocumentType;
 
     public int getIdDocument() {
@@ -29,8 +38,8 @@ public class Document {
         this.idDocumentType = idDocumentType;
     }
 
-	@Override
-	public String toString() {
-		return "Document [idDocument=" + idDocument + ", title=" + title + ", idDocumentType=" + idDocumentType + "]";
-	}
+    @Override
+    public String toString() {
+        return "Document [idDocument=" + idDocument + ", title=" + title + ", idDocumentType=" + idDocumentType + "]";
+    }
 }
