@@ -23,7 +23,11 @@ public class Subscriber {
         this.address = address;
     }
 
-    public Subscriber(String firstName2, String lastName2, String address2, int idUser2) {
+    public Subscriber(String firstname, String lastname, String address, int idUser) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address = address;
+        this.idUser = idUser;
     }
 
     public int getIdSubscriber() {
